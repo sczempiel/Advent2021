@@ -19,7 +19,6 @@ import java.util.Formatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class AdventUtils {
@@ -183,76 +182,6 @@ public class AdventUtils {
 
 	public static String printNum(Number num, int length) {
 		return printNum(num, length, ' ');
-	}
-
-	public static String gridToString(char[][] grid) throws IOException {
-		StringBuilder sb = new StringBuilder();
-
-		for (int y = 0; y < grid.length; y++) {
-			for (int x = 0; x < grid[y].length; x++) {
-				sb.append(grid[y][x]);
-			}
-			if (y < grid.length - 1) {
-				sb.append("\n");
-			}
-		}
-		return sb.toString();
-	}
-
-	public static void sysoGrid(char[][] grid) throws IOException {
-		System.out.println(gridToString(grid));
-	}
-
-	public static void printGrid(int day, int task, char[][] grid, boolean publish) throws IOException {
-		String printable = gridToString(grid);
-		if (publish) {
-			AdventUtils.publishExtra(day, task, printable, "grid");
-		} else {
-			AdventUtils.writeExtra(day, task, printable, "grid");
-		}
-	}
-
-	public static <T> String printMap(Map<Tuple<Integer, Integer>, T> map, Function<T, String> printValue) {
-		Integer smallestY = null;
-		Integer biggestY = null;
-		Integer smallestX = null;
-		Integer biggestX = null;
-
-		for (Tuple<Integer, Integer> pos : map.keySet()) {
-
-			int y = pos.getLeft();
-			int x = pos.getRight();
-
-			if (smallestY == null || y < smallestY) {
-				smallestY = y;
-			}
-
-			if (biggestY == null || y > biggestY) {
-				biggestY = y;
-			}
-
-			if (smallestX == null || x < smallestX) {
-				smallestX = x;
-			}
-
-			if (biggestX == null || x > biggestX) {
-				biggestX = x;
-			}
-		}
-
-		StringBuilder sb = new StringBuilder();
-
-		for (int y = smallestY; y <= biggestY; y++) {
-			for (int x = smallestX; x <= biggestX; x++) {
-				sb.append(printValue.apply(map.get(Tuple.of(y, x))));
-			}
-
-			if (y < biggestY) {
-				sb.append("\n");
-			}
-		}
-
-		return sb.toString();
 	}
 
 	public static String getPrettyTimeElapsed(long start, long now) {

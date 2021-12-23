@@ -12,8 +12,8 @@ public class Day7Task2Main {
 
 	public static void main(String[] args) {
 		try {
-			List<Integer> crabs = Arrays.asList(AdventUtils.getStringInput(7).get(0).split(",")).stream()
-					.map(Integer::valueOf).collect(Collectors.toList());
+			List<Integer> crabs = Arrays.stream(AdventUtils.getStringInput(7).get(0).split(",")).map(Integer::valueOf)
+					.collect(Collectors.toList());
 
 			int min = crabs.stream().mapToInt(Integer::intValue).min().getAsInt();
 			int max = crabs.stream().mapToInt(Integer::intValue).max().getAsInt();

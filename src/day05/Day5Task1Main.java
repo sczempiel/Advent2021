@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 
 import util.AdventUtils;
 import util.Tuple;
+import util.grid.map.GridUtils;
 
 public class Day5Task1Main {
 
@@ -60,7 +61,7 @@ public class Day5Task1Main {
 						return points.stream();
 					}).collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
-			AdventUtils.writeExtra(5, 1, AdventUtils.printMap(map, l -> l != null ? String.valueOf(l) : "."), "grid");
+			AdventUtils.writeExtra(5, 1, GridUtils.print(map, l -> l != null ? String.valueOf(l) : "."), "grid");
 
 			long overlapCount = map.entrySet().stream().filter(p -> p.getValue() >= 2).count();
 
